@@ -1,58 +1,73 @@
 import { useEffect, useState } from "react";
-import SmoothieCard from "../component/SmoothieCard";
+import RecipeCard from "../component/RecipeCard";
 import supabase from "../config/supabaseClient";
+import { UserAuth } from "../pages/context/AuthContext";
 
 const Home = () => {
   const [fetchError, setFetchError] = useState(null);
-  const [smoothies, setSmoothies] = useState([]);
-  const [orderBy, setOrderBy] = useState('created_at')
+  const [recipes, setRecipes] = useState([]);
+  const [orderBy, setOrderBy] = useState('created_at');
+  const { session } = UserAuth();
 
-  const handleDelete = (id) => {
-    // Filter out the deleted smoothie from local state
-    setSmoothies(prevSmoothies => prevSmoothies.filter(smoothie => smoothie.id !== id));
+  const handleDelete = async (id) => {
+    if (!session) {
+      alert("You must be logged in to delete a recipe.");
+      return;
+    }
+
+    const { error } = await supabase
+      .from('recipe')
+      .delete()
+      .eq('id', id)
+      .eq('user_id', session.user.id); // Only allow owner to delete
+
+    if (!error) {
+      setRecipes((prev) => prev.filter((recipe) => recipe.id !== id));
+    }
   };
 
   useEffect(() => {
-    const fetchSmoothies = async () => {
-      const { data, error } = await supabase.from("smoothies").select().order(orderBy, { ascending: false });
+    const fetchRecipes = async () => {
+      const { data, error } = await supabase
+        .from("recipe")
+        .select()
+        .order(orderBy, { ascending: false });
 
       if (error) {
         setFetchError('Could not fetch recipes');
-        setSmoothies([]);
+        setRecipes([]);
         console.log(error);
       } else if (data) {
-        setSmoothies(data);
+        setRecipes(data);
         setFetchError(null);
       }
     };
-
-    fetchSmoothies();
+    fetchRecipes();
   }, [orderBy]);
 
   return (
     <div className="page home">
       {fetchError && <p>{fetchError}</p>}
-      {smoothies.length > 0 ? (
-        <div className="smoothies">
+      {recipes.length > 0 ? (
+        <div className="recipes">
           <div className="order-by">
-            <p>  Order By :</p>
+            <p>Sorted by:</p>
             <button onClick={() => setOrderBy('created_at')}>Time Created</button>
             <button onClick={() => setOrderBy('title')}>Title</button>
             <button onClick={() => setOrderBy('rating')}>Rating</button>
-            {orderBy}
           </div>
-          <div className="smoothies-grid">
-            {smoothies.map((smoothie) => (
-              <SmoothieCard
-                key={smoothie.id}
-                smoothie={smoothie}
-                onDelete={handleDelete} // Pass delete handler to each card
+          <div className="recipes-grid">
+            {recipes.map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                recipe={recipe} // keep SmoothieCard as is
+                onDelete={handleDelete} // Safe delete
               />
             ))}
           </div>
         </div>
       ) : (
-        <p>No smoothies available</p>
+        <p>Loading...</p>
       )}
     </div>
   );
