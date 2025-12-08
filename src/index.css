@@ -1,80 +1,192 @@
+/* ================= Fonts ================= */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
+/* ================= Root Variables ================= */
 :root {
   --primary: #12bca2;
   --secondary: #6d15df;
 }
-h1,h2,h3 {
-  margin: 0;
+
+/* ================= Global ================= */
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f1faf9;
   color: #333;
-  font-family: 'Poppins';
-  background:#f1faf9;
 }
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================= Navbar ================= */
 nav {
   background: var(--primary);
   padding: 10px 20px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo left, links right */
 }
-nav a {
-  color: #f2f2f2;
-  margin: 10px;
-  display: inline-block;
-}
+
 nav h1 {
   color: #fff;
+  margin: 0;
+  font-size: 1.8rem;
 }
-.page {
-  max-width: 1200px;
-  margin: 20px auto;
-  padding: 20px;
-}
-/*smoothie grid*/
-.smoothie-grid {
-  margin-top: 40px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 40px;
-}
-.smoothie-card {
-  width: 100%;
-  padding: 20px;
-  margin:10px;
-  background:#fff;
-  box-sizing: border-box;
-  border-radius: 6px;
-  position: relative;
-}
-.smoothie-card .rating {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background: var(--secondary);
-  color: #fff;
-  border-radius: 6px;
-  width: 40px;
-  height: 0;
-  padding: 20px 0;
-  line-height: 0px;
-  text-align: center;
-}
-.smoothie-card .buttons {
-  text-align: right;
-}
-.smoothie-card i {
-  color: #9c8a8a;
-  margin-left: 20px;
-  font-size: 1 rem;
-  padding: 6px;
-  background: #f1faf9;
-  border-radius: 50%;
+
+.nav-links a, .nav-links button {
+  color: #f2f2f2;
+  margin-left: 15px;
+  text-decoration: none;
+  font-weight: 500;
+  border: none;
+  background: none;
   cursor: pointer;
 }
 
-/* forms */
+.nav-links button:hover, nav a:hover {
+  color: #ffd700;
+}
+
+/* ================= Page Container ================= */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ================= Banner ================= */
+.banner {
+  text-align: center;
+  padding: 70px 20px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border-radius: 0 0 25px 25px;
+  margin-bottom: 40px;
+}
+
+.banner h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.banner p {
+  font-size: 1.2rem;
+  opacity: 0.95;
+  margin-top: 10px;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ================= Order Buttons ================= */
+.order-by {
+  margin-bottom: 20px;
+}
+
+.order-by button {
+  margin-left: 5px;
+  background: #fff;
+  color: #857e7e;
+  border: 1px solid var(--primary);
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-family: "Poppins";
+  cursor: pointer;
+}
+
+.order-by button:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* ================= Recipes Grid ================= */
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  padding-bottom: 40px;
+}
+
+/* ================= Recipe Card ================= */
+.recipe-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  cursor: pointer;
+  position: relative;
+  min-height: 180px;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.recipe-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.recipe-card .card-preview {
+  font-size: 0.95rem;
+  color: #555;
+  flex-grow: 1;
+  line-height: 1.4rem;
+  margin-bottom: 12px;
+}
+
+.recipe-card .card-rating {
+  font-weight: 600;
+  color: #ffb400;
+  text-align: right;
+  font-size: 1rem;
+  margin-top: auto;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit-icon, .delete-icon {
+  background: #f1faf9;
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.edit-icon:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.delete-icon:hover {
+  background: #ff4d4d;
+  color: #fff;
+}
+
+/* ================= Forms ================= */
 form {
   background: #fff;
   padding: 20px;
@@ -82,32 +194,241 @@ form {
   margin: 0 auto;
   border-radius: 6px;
 }
+
 form input, form textarea {
   display: block;
   width: 100%;
   padding: 6px;
-  box-sizing: border-box;
   border: 1px solid #ccc;
   margin: 10px 0 20px 0;
 }
+
 form button {
   background: var(--primary);
   color: #fff;
-  border: 0;
+  border: none;
   border-radius: 6px;
   padding: 6px 8px;
   font-family: "Poppins";
   cursor: pointer;
 }
-/* order-by buttons */
-.order-by button {
-  margin-right: 0px;
-  margin-left:5px;
+
+/* ================= Recipe Detail Page ================= */
+.recipe-detail {
   background: #fff;
-  color: #857e7e;
-  border: 1px solid #12bca2;
-  padding: 5px 10px,10px,10px;
-  border-radius: 6px;
-  font-family: "Poppins";
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+}
+
+.recipe-title {
+  font-size: 2.2rem;
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.recipe-rating {
+  font-size: 1.2rem;
+  color: #ffb400;
+  margin-bottom: 20px;
+}
+
+.recipe-text p {
+  line-height: 1.7rem;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.recipe-created {
+  margin-top: 20px;
+  font-weight: 500;
+  color: #777;
+}
+
+.actions {
+  margin: 30px 0;
+  display: flex;
+  gap: 15px;
+}
+
+.actions a, .actions button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
   cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: #fff;
+}
+
+.actions a {
+  background: var(--primary);
+}
+
+.actions.a:hover {
+  background: #0ea28a;
+}
+
+.actions button {
+  background: #ff4d4d;
+}
+
+.actions button:hover {
+  background: #e03b3b;
+}
+
+.recipe-detail a[href="/"] {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* ================= Carousel ================= */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 30px 0;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+}
+
+.carousel-slide {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 350px;
+  padding: 30px 20px;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 100%;
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.carousel-slide.active {
+  left: 0;
+  opacity: 1;
+}
+
+.slide-text {
+  flex: 1 1 50%;
+  transform: translateX(-50px);
+  opacity: 0;
+  transition: all 1s ease-in-out;
+}
+
+.carousel-slide.active .slide-text {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slide-text h1 {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.slide-text p {
+  font-size: 1.1rem;
+  color: #444;
+  line-height: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.slide-text .subtext {
+  font-style: italic;
+  color: #777;
+}
+
+.slide-image {
+  flex: 1 1 50%;
+  text-align: right;
+}
+
+.slide-image img {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+
+
+
+
+
+.banner-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  min-height: 350px;
+  background: #f5f5f5;
+}
+
+/* Left Text */
+.banner-text {
+  flex: 1 1 50%;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #12bca2;
+}
+
+/* Slide-in animation for text */
+.slide-in {
+  animation: slideIn 1s ease forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.banner-text h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.banner-text p {
+  font-size: 1.1rem;
+  line-height: 1.5rem;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+.banner-text .subtext {
+  font-style: italic;
+  color: #777;
+}
+
+/* Right Image */
+.banner-image {
+  flex: 1 1 50%;
+  max-height: 350px;
+  overflow: hidden;
+}
+
+.banner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* keeps image aspect ratio, fills container */
+  display: block;
+  border-radius: 0 12px 12px 0;
 }
