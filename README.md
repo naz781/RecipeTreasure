@@ -26,8 +26,8 @@ Welcome to **Family Recipe** — a web app to share, preserve, and explore your 
 ---
 ### 💡 Usage
 
-users can Browse recipes on the home page.
-View details of each recipe.
-Sort recipes by date, title, or rating.
+* users can Browse recipes on the home page.
+* View details of each recipe.
+* Sort recipes by date, title, or rating.
 
 only Authorised Users can Login to add, edit, or delete your recipes.
