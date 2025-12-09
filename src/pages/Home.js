@@ -79,6 +79,7 @@ import RecipeCard from "../component/RecipeCard";
 import supabase from "../config/supabaseClient";
 import { UserAuth } from "../pages/context/AuthContext";
 import FoodCarousel from "./FoodCarousel";
+import Banner from '../pages/Banner'
 
 const Home = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -150,6 +151,9 @@ const Home = () => {
       ) : (
         <p>Loading recipes...</p>
       )}
+
+      {/* 🔥 About Banner at the bottom */}
+      <Banner />
     </div>
   );
 };
